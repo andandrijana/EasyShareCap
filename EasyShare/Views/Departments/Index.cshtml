@@ -1,0 +1,35 @@
+﻿@model IEnumerable<EasyShare.Models.Department>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Job Board</h1>
+
+<div style="display:flex">
+    @foreach (var item in Model)
+    {
+        <table width=220px>
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayFor(modelItem => item.Department1)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                        @foreach (var p in item.Projects.Where(pr => pr.CompanyDepartmentId == item.CompanyDepartmentId).ToList())
+                        {
+                            <tR>
+                                <td>
+                                    <a asp-controller="Projects" asp-action="Details" asp-route-id="@p.ProjectId" asp-route-ContName="@p.ProjectName"> @p.ProjectName </a>
+                                </td>
+                            </tR>
+                        }
+                
+            </tbody>
+        </table>
+    }
+</div>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<EasyShare.Models.Projects>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Job Board</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div style="display:flex">
+    @foreach (var item in Model)
+    {
+            <table width=225px>
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayFor(modelItem => item.CompanyDepartment.Department1)
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item2 in Model)
+                    {
+                        <tr class="text-break">
+                            @if (item2.CompanyDepartment.Department1 == item.CompanyDepartment.Department1)
+                            {
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@item.ProjectId" asp-route-ContName="@item.ProjectName">@Html.DisplayFor(modelItem => item2.ProjectName)</a>
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+    }
+</div>
